@@ -1,0 +1,54 @@
+basePath: /
+definitions:
+  web.ErrorResponse:
+    properties:
+      error: {}
+    type: object
+  web.HealthcheckResponse:
+    properties:
+      status:
+        type: string
+      system_info:
+        $ref: '#/definitions/web.HealthcheckSystemInfo'
+    type: object
+  web.HealthcheckSystemInfo:
+    properties:
+      environment:
+        type: string
+      version:
+        type: string
+    type: object
+  web.Response-web_HealthcheckResponse:
+    properties:
+      data:
+        $ref: '#/definitions/web.HealthcheckResponse'
+    type: object
+info:
+  contact:
+    name: Kertaskerja Dev Team
+  description: Service untuk handle layanan mpp
+  termsOfService: http://swagger.io/terms/
+  title: Layanan Service
+  version: "1.0"
+paths:
+  /healthcheck:
+    get:
+      description: checking if this service is accessible
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.Response-web_HealthcheckResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.ErrorResponse'
+      summary: healthcheck
+      tags:
+      - healthcheck
+schemes:
+- http
+- https
+swagger: "2.0"

@@ -1,0 +1,83 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Service untuk handle layanan mpp",
+        "title": "Layanan Service",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Kertaskerja Dev Team"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/healthcheck": {
+            "get": {
+                "description": "checking if this service is accessible",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "healthcheck"
+                ],
+                "summary": "healthcheck",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/web.Response-web_HealthcheckResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/web.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "web.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {}
+            }
+        },
+        "web.HealthcheckResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "system_info": {
+                    "$ref": "#/definitions/web.HealthcheckSystemInfo"
+                }
+            }
+        },
+        "web.HealthcheckSystemInfo": {
+            "type": "object",
+            "properties": {
+                "environment": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "web.Response-web_HealthcheckResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/web.HealthcheckResponse"
+                }
+            }
+        }
+    }
+}
